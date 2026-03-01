@@ -6,7 +6,27 @@ import HistoryView from '../views/HistoryView.vue'
 const routes = [
   { path: '/', component: DashboardView },
   { path: '/trends', component: TrendsView },
-  { path: '/history', component: HistoryView }
+  { path: '/history', component: HistoryView },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/LoginPage.vue'),
+    // Meta: solo para no autenticados (si ya está logueado, que no vea el login)
+    meta: { requiresGuest: true },
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('@/views/RegisterPage.vue'),
+    meta: { requiresGuest: true },
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import('@/views/DashboardView.vue'),
+    // *** RUTA PROTEGIDA ***
+    meta: { requiresAuth: true },
+  },
 ]
 
 export default createRouter({
